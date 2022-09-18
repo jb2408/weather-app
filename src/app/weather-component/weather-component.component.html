@@ -1,0 +1,104 @@
+<mat-toolbar
+  color="primary"
+  fxLayout="row"
+  fxLayout.lt-sm="column"
+  fxLayoutAlign="space-between center"
+>
+  <span>Weather App</span>
+  <div
+    fxLayout="row wrap"
+    fxLayoutAlign="space-between center"
+    fxLayoutGap="16px"
+  >
+    <form
+      class="search-loc-form"
+      [formGroup]="locationForm"
+      (ngSubmit)="onSelectLocation(locationForm.value)"
+    >
+      <mat-form-field>
+        <mat-label>City name</mat-label>
+        <input
+          type="text"
+          name="city"
+          aria-label="Find city"
+          matInput
+          formControlName="location"
+        />
+      </mat-form-field>
+    </form>
+    <span>or</span>
+    <button mat-raised-button (click)="getUserLocation()">
+      Use my location
+    </button>
+  </div>
+</mat-toolbar>
+<div class="weather-container" fxLayout="column">
+  <div *ngIf="weatherData; else chooseLocation">
+    <h1 class="title">{{ weatherData.name }}, {{ weatherData.sys.country }}</h1>
+    <div
+      class="subtitle"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="16px"
+    >
+      <span>{{ weatherData.dt * 1000 | date: "dd/MM/yyyy" }}</span>
+      <app-icon-text
+        type="sunrise"
+        [data]="weatherData.sys.sunrise"
+      ></app-icon-text>
+      <app-icon-text
+        type="sunset"
+        [data]="weatherData.sys.sunset"
+      ></app-icon-text>
+    </div>
+    <div
+      class="data-content"
+      fxLayout="row"
+      fxLayout.lt-sm="column"
+      fxLayoutGap="48px"
+      fxLayoutGap.lt-sm="24px"
+    >
+      <div fxLayout="column">
+        <span class="temperature">
+          {{ countToCelsius(weatherData.main.temp) }}&deg;C
+        </span>
+        <span class="subtitle font-m"
+          >Feels like:
+          {{ countToCelsius(weatherData.main.feels_like) }}&deg;C</span
+        >
+      </div>
+      <mat-divider fxHide.lt-sm [vertical]="true"></mat-divider>
+      <mat-divider fxHide fxShow.lt-sm></mat-divider>
+      <div class="more-data" fxLayout="row wrap" fxLayoutGap="16px grid">
+        <app-more-data
+          fxFlex="50%"
+          bigText="{{ weatherData.main.humidity }}%"
+          smallText="Humidity"
+        ></app-more-data>
+        <app-more-data
+          fxFlex="50"
+          bigText="{{ weatherData.main.pressure }}hPa"
+          smallText="Pressure"
+        ></app-more-data>
+        <app-more-data
+          fxFlex="50"
+          bigText="{{ weatherData.clouds.all }}%"
+          smallText="Cloudiness"
+        ></app-more-data>
+        <app-more-data
+          fxFlex="50"
+          bigText="{{ weatherData.wind.speed }}km/h"
+          smallText="Wind speed"
+        ></app-more-data>
+      </div>
+    </div>
+  </div>
+  <ng-template #chooseLocation>
+    <h1 *ngIf="!ifWrongCity" class="title center">
+      Choose location to see the weather forecast
+    </h1>
+    <h1 *ngIf="ifWrongCity" class="title center">
+      City {{ userCity }} not found, try again.
+    </h1>
+  </ng-template>
+</div>

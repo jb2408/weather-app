@@ -1,0 +1,44 @@
+@import "../../styles.scss";
+
+mat-toolbar {
+  @include pad-all(13, 6, 13, 6);
+  @media (max-width: $sm) {
+    min-height: 120px;
+    @include pad(3);
+  }
+}
+.weather-container {
+  @include pad-all(10, 25, 10, 25);
+  @media (max-width: $md) {
+    @include pad-all(5, 10, 5, 10);
+  }
+  @media (max-width: $sm) {
+    @include pad(5);
+  }
+  .title {
+    @include margin(0);
+    font-weight: bold;
+    color: $dark-text;
+  }
+  .subtitle {
+    font-weight: normal;
+    color: $light-text;
+    font-size: $font-m;
+  }
+  .data-content {
+    @include margin-top(4);
+    .temperature {
+      font-size: $font-xl * 3;
+      line-height: 90px;
+      color: $dark-text;
+    }
+  }
+  .more-data {
+    font-size: $font-m;
+    color: $mid-text;
+  }
+}
+
+.center {
+  text-align: center;
+}

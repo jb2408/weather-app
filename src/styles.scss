@@ -1,4 +1,95 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+//COLORS
+$light-text: #7986cb;
+$ligth-background: #e8eaf6;
+$mid-text: #5c6bc0;
+$dark-text: #3f51b5;
+
+// SPACING
+$pad-margin-multiplier: 4px;
+
+// FONT SIZES:
+$font-xs: 10px;
+$font-s: 14px;
+$font-m: 16px;
+$font-l: 22px;
+$font-xl: 30px;
+$font-xxl: 40px;
+
+// BREAKPOINTS
+$xs: 599px;
+$sm: 959px;
+$md: 1279px;
+$lg: 1919px;
+$xl: 5000px;
+
+// PADDINGS
+
+@mixin pad($n: 4) {
+  padding: $n * $pad-margin-multiplier;
+}
+
+@mixin pad-top($n: 4) {
+  padding-top: $n * $pad-margin-multiplier;
+}
+
+@mixin pad-right($n: 4) {
+  padding-right: $n * $pad-margin-multiplier;
+}
+
+@mixin pad-bottom($n: 4) {
+  padding-bottom: $n * $pad-margin-multiplier;
+}
+
+@mixin pad-left($n: 4) {
+  padding-left: $n * $pad-margin-multiplier;
+}
+
+@mixin pad-all($a: 4, $b: 4, $c: 4, $d: 4) {
+  padding: $a * $pad-margin-multiplier $b * $pad-margin-multiplier $c *
+    $pad-margin-multiplier $d * $pad-margin-multiplier;
+}
+
+// MARGINS
+
+@mixin margin($n: 4) {
+  margin: $n * $pad-margin-multiplier;
+}
+
+@mixin margin-top($n: 4) {
+  margin-top: $n * $pad-margin-multiplier;
+}
+
+@mixin margin-right($n: 4) {
+  margin-right: $n * $pad-margin-multiplier;
+}
+
+@mixin margin-bottom($n: 4) {
+  margin-bottom: $n * $pad-margin-multiplier;
+}
+
+@mixin margin-left($n: 4) {
+  margin-left: $n * $pad-margin-multiplier;
+}
+
+@mixin margin-all($a: 4, $b: 4, $c: 4, $d: 4) {
+  margin: $a * $pad-margin-multiplier $b * $pad-margin-multiplier $c *
+    $pad-margin-multiplier $d * $pad-margin-multiplier;
+}
+
+// USEFUL CLASSES
+.font-m {
+  font-size: $font-m;
+  line-height: 20px;
+}

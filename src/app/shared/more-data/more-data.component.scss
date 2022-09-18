@@ -1,0 +1,11 @@
+@import "../../../styles.scss";
+
+.big-text {
+  font-size: $font-l;
+  color: $mid-text;
+  font-weight: 500;
+}
+.small-text {
+  font-size: $font-m;
+  color: $light-text;
+}
