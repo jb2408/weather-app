@@ -1,0 +1,23 @@
+@import "../../../styles.scss";
+
+.day-card {
+  box-sizing: border-box;
+  //border: 2px solid $light-text;
+  background-color: $mid-text;
+  border-radius: 5px;
+  @include pad(4);
+
+  .day {
+    font-weight: 500;
+    font-size: $font-m;
+    line-height: $font-m;
+    color: $mid-text;
+    color: white;
+  }
+  .temp {
+    font-size: $font-xl;
+    line-height: $font-xl;
+    color: $dark-text;
+    color: white;
+  }
+}

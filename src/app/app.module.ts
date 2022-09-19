@@ -11,9 +11,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 import { IconTextComponent } from './shared/icon-text/icon-text.component';
 import { MoreDataComponent } from './shared/more-data/more-data.component';
+import { ForecastBoxComponent } from './shared/forecast-box/forecast-box.component';
 
 @NgModule({
-  declarations: [AppComponent, WeatherComponentComponent, IconTextComponent, MoreDataComponent],
+  declarations: [AppComponent, WeatherComponentComponent, IconTextComponent, MoreDataComponent, ForecastBoxComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

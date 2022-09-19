@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { WeatherService } from '../weather.service';
 import { GeolocationService } from '@ng-web-apis/geolocation';
 import { take } from 'rxjs';
+import { DayData, WeatherData } from '../weather';
 
 @Component({
   selector: 'app-weather-component',
@@ -13,7 +14,9 @@ export class WeatherComponentComponent implements OnInit {
   userLon!: number;
   userLat!: number;
   userCity!: string;
-  weatherData!: any;
+  weatherData!: WeatherData;
+  weatherDataNow!: DayData;
+  weatherDataForecast!: DayData[];
 
   locationForm!: FormGroup;
 
@@ -65,6 +68,8 @@ export class WeatherComponentComponent implements OnInit {
         .subscribe(
           (res) => {
             this.weatherData = res;
+            this.weatherDataNow = this.weatherData.list[0];
+            this.getForecast();
           },
           (err) => {
             this.ifWrongCity = true;
@@ -74,13 +79,25 @@ export class WeatherComponentComponent implements OnInit {
       this._weatherService.getCurrentWeatherByCity(this.userCity).subscribe(
         (res) => {
           this.weatherData = res;
+          this.weatherDataNow = this.weatherData.list[0];
+          this.getForecast();
         },
         (err) => {
-          console.log('wtffff');
           this.ifWrongCity = true;
         }
       );
     }
+  }
+
+  getForecast() {
+    this.weatherDataForecast = this.weatherData.list
+      .filter(
+        (e) =>
+          e.dt_txt.split(' ')[0] !== this.weatherDataNow.dt_txt.split(' ')[0]
+      )
+      .filter(function (value, index) {
+        return (index + 4) % 8 == 0;
+      });
   }
 }
 

@@ -37,6 +37,9 @@ mat-toolbar {
     font-size: $font-m;
     color: $mid-text;
   }
+  .forecast-content {
+    @include pad-top(10);
+  }
 }
 
 .center {

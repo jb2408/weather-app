@@ -34,21 +34,23 @@
 </mat-toolbar>
 <div class="weather-container" fxLayout="column">
   <div *ngIf="weatherData; else chooseLocation">
-    <h1 class="title">{{ weatherData.name }}, {{ weatherData.sys.country }}</h1>
+    <h1 class="title">
+      {{ weatherData.city.name }}, {{ weatherData.city.country }}
+    </h1>
     <div
       class="subtitle"
       fxLayout="row"
       fxLayoutAlign="start center"
       fxLayoutGap="16px"
     >
-      <span>{{ weatherData.dt * 1000 | date: "dd/MM/yyyy" }}</span>
+      <span>{{ weatherDataNow.dt * 1000 | date: "EEEE, dd/MM/yyyy" }}</span>
       <app-icon-text
         type="sunrise"
-        [data]="weatherData.sys.sunrise"
+        [data]="weatherData.city.sunrise"
       ></app-icon-text>
       <app-icon-text
         type="sunset"
-        [data]="weatherData.sys.sunset"
+        [data]="weatherData.city.sunset"
       ></app-icon-text>
     </div>
     <div
@@ -60,37 +62,53 @@
     >
       <div fxLayout="column">
         <span class="temperature">
-          {{ countToCelsius(weatherData.main.temp) }}&deg;C
+          {{ countToCelsius(weatherDataNow.main.temp) }}&deg;C
         </span>
         <span class="subtitle font-m"
           >Feels like:
-          {{ countToCelsius(weatherData.main.feels_like) }}&deg;C</span
+          {{ countToCelsius(weatherDataNow.main.feels_like) }}&deg;C</span
         >
       </div>
       <mat-divider fxHide.lt-sm [vertical]="true"></mat-divider>
       <mat-divider fxHide fxShow.lt-sm></mat-divider>
       <div class="more-data" fxLayout="row wrap" fxLayoutGap="16px grid">
         <app-more-data
-          fxFlex="50%"
-          bigText="{{ weatherData.main.humidity }}%"
+          fxFlex="50"
+          flexStyle="column"
+          bigText="{{ weatherDataNow.main.humidity }}%"
           smallText="Humidity"
         ></app-more-data>
         <app-more-data
           fxFlex="50"
-          bigText="{{ weatherData.main.pressure }}hPa"
+          flexStyle="column"
+          bigText="{{ weatherDataNow.main.pressure }}hPa"
           smallText="Pressure"
         ></app-more-data>
         <app-more-data
           fxFlex="50"
-          bigText="{{ weatherData.clouds.all }}%"
+          flexStyle="column"
+          bigText="{{ weatherDataNow.clouds.all }}%"
           smallText="Cloudiness"
         ></app-more-data>
         <app-more-data
           fxFlex="50"
-          bigText="{{ weatherData.wind.speed }}km/h"
+          flexStyle="column"
+          bigText="{{ weatherDataNow.wind.speed }}km/h"
           smallText="Wind speed"
         ></app-more-data>
       </div>
+    </div>
+    <div
+      *ngIf="weatherDataForecast"
+      class="forecast-content"
+      fxLayout="row wrap"
+      fxLayoutGap="16px grid"
+    >
+      <ng-container *ngFor="let day of weatherDataForecast">
+        <div fxFlex="25" fxFlex.lt-md="50" fxFlex.lt-sm="100">
+          <app-forecast-box [dayForecast]="day"></app-forecast-box>
+        </div>
+      </ng-container>
     </div>
   </div>
   <ng-template #chooseLocation>

@@ -1,0 +1,32 @@
+<div class="day-card" fxLayout="column" fxLayoutGap="16px">
+  <span class="day">{{
+    dayForecast.dt * 1000 | date: "EEEE, dd/MM/yyyy"
+  }}</span>
+  <span class="temp">{{ countToCelsius(dayForecast.main.temp) }}&deg;C</span>
+  <div class="more-data" fxLayout="column " fxLayoutGap="8px ">
+    <app-more-data
+      fxFlex="50"
+      flexStyle="row-reverse"
+      bigText="{{ dayForecast.main.humidity }}%"
+      smallText="Humidity"
+    ></app-more-data>
+    <app-more-data
+      fxFlex="50"
+      flexStyle="row-reverse"
+      bigText="{{ dayForecast.main.pressure }}hPa"
+      smallText="Pressure"
+    ></app-more-data>
+    <app-more-data
+      fxFlex="50"
+      flexStyle="row-reverse"
+      bigText="{{ dayForecast.clouds.all }}%"
+      smallText="Cloudiness"
+    ></app-more-data>
+    <app-more-data
+      fxFlex="50"
+      flexStyle="row-reverse"
+      bigText="{{ dayForecast.wind.speed }}km/h"
+      smallText="Wind speed"
+    ></app-more-data>
+  </div>
+</div>

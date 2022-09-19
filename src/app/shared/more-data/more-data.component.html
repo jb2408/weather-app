@@ -1,4 +1,14 @@
-<div fxLayout="column" fxLayoutGap="4px">
-  <span class="big-text">{{ bigText }}</span>
-  <span class="small-text">{{ smallText }}</span>
+<div fxLayout="{{ flexStyle }}" fxLayoutGap="4px">
+  <span
+    fxFlex="{{ fxWidth }}"
+    class="big-text {{ flexStyle }}"
+    [ngClass]="{ white: flexStyle === 'row-reverse' }"
+    >{{ bigText }}</span
+  >
+  <span
+    fxFlex="{{ fxWidth }}"
+    class="small-text"
+    [ngClass]="{ white: flexStyle === 'row-reverse' }"
+    >{{ smallText }}</span
+  >
 </div>
